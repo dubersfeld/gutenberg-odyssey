@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-service
+spec:
+  selector:
+    matchLabels:
+      run: book-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: book-service
+    spec:
+      containers:
+      - name: book-service
+        image: dubersfeld/book-server
+        readinessProbe:
+          periodSeconds: 30
+          tcpSocket:
+            #path: /ready
+            port: 8081
+        env:
+        - name: GUTENBERG_CONFIG_URI
+          value: "http://config-service:8888"
+        - name: PROFILE
+          value: dev
+        ports:
+        - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-service
+  labels:
+    run: book-service
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+  selector:
+    run: book-service

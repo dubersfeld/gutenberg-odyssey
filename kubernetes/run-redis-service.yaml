@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-service
+spec:
+  selector:
+    matchLabels:
+      run: redis-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: redis-service
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        livenessProbe:
+          periodSeconds: 5
+          initialDelaySeconds: 20
+          tcpSocket:
+            port: 6379
+        ports:
+        - containerPort: 6379
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    run: redis-service
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+  selector:
+    run: redis-service

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+kubectl delete configmap gutenberg-config
+
+kubectl create configmap gutenberg-config --from-file=config-repo

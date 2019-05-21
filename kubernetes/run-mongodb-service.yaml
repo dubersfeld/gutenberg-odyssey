@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: books-mongodb
+spec:
+  selector:
+    matchLabels:
+      run: books-mongodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: books-mongodb
+    spec:
+      containers:
+      - image: dubersfeld/books-mongodb
+        name: mongo
+        livenessProbe:
+          periodSeconds: 5
+          initialDelaySeconds: 20
+          tcpSocket:
+            port: 27017
+        volumeMounts:
+        - name: mongodb-data
+          mountPath: /data/db
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+      volumes:
+      - name: mongodb-data
+        persistentVolumeClaim:
+          claimName: mongodb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: books-mongodb
+  labels:
+    run: books-mongodb
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  selector:
+    run: books-mongodb

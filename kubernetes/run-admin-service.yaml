@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-service
+spec:
+  selector:
+    matchLabels:
+      run: admin-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: admin-service
+    spec:
+      containers:
+      - name: admin-service
+        image: dubersfeld/admin-server
+        readinessProbe:
+          periodSeconds: 30
+          tcpSocket:
+            port: 9090
+        env:
+        - name: GUTENBERG_CONFIG_URI
+          value: "http://config-service:8888"
+        - name: PROFILE
+          value: dev
+        ports:
+        - containerPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-service
+  labels:
+    run: admin-service
+spec:
+  ports:
+  - port: 9090
+    protocol: TCP
+  selector:
+    run: admin-service

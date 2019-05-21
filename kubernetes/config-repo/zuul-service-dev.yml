@@ -1,0 +1,57 @@
+server:
+  port: 5555
+    
+zuul:
+  sensitive-headers: 
+  routes:  
+    books-by-address:
+      path: /books-by-address/**
+      url: http://book-service:8081/
+    books-by-service:
+      path: /books-by-service/**
+      serviceId: book-service
+    book-service: /books/**   
+    
+    reviews-by-address:
+      path: /reviews-by-address/**
+      url: http://review-service:8082/
+    reviews-by-service:
+      path: /reviews-by-service/**
+      serviceId: review-service
+    review-service: /reviews/**   
+    
+    orders-by-address:
+      path: /orders-by-address/**
+      url: http://order-service:8083/
+    orders-by-service:
+      path: /orders-by-service/**
+      serviceId: order-service
+    order-service: /orders/**   
+    
+    users-by-address:
+      path: /users-by-address/**
+      url: http://user-service:8084/
+    users-by-service:
+      path: /users-by-service/**
+      serviceId: user-service
+    user-service: /users/**   
+    
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+ribbon:
+  ConnectTimeout:  10000
+  ReadTimeout:  10000
+    
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/

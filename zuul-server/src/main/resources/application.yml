@@ -1,0 +1,51 @@
+#server:
+#  port: 5555
+    
+#zuul:
+#  sensitive-headers: 
+#  routes:  
+#    books-by-address:
+#      path: /books-by-address/**
+#      url: http://localhost:8081/
+#    books-by-service:
+#      path: /books-by-service/**
+#      serviceId: book-service
+#    book-service: /books/**   
+    
+#    reviews-by-address:
+#      path: /reviews-by-address/**
+#      url: http://localhost:8082/
+#    reviews-by-service:
+#      path: /reviews-by-service/**
+#      serviceId: review-service
+#    review-service: /reviews/**   
+    
+#    orders-by-address:
+#      path: /orders-by-address/**
+#      url: http://localhost:8083/
+#    orders-by-service:
+#      path: /orders-by-service/**
+#      serviceId: order-service
+#    order-service: /orders/**   
+    
+#    users-by-address:
+#      path: /users-by-address/**
+#      url: http://localhost:8084/
+#    users-by-service:
+#      path: /users-by-service/**
+#      serviceId: user-service
+#    user-service: /users/**   
+    
+    
+    
+    
+    
+    
+    #customers-by-address:
+    #  path: /customers-by-address/**
+    #  url: http://localhost:8080/
+    #customers-by-service:
+    #  path: /customers-by-service/**
+    #  serviceId: customers-frontend
+    #customers-frontend: /customers/**   
+    

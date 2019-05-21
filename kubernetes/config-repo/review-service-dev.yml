@@ -1,0 +1,23 @@
+server:
+  port: 8082
+  servlet:
+    context-path:
+    
+spring:
+  data:
+    mongodb:
+      uri: mongodb://spring:password1234@books-mongodb:27017/booksonline
+      
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/
+
+
+#baseReviewsUrl: http://localhost:5555/reviews
+baseReviewsUrl: http://zuul-service:5555/reviews

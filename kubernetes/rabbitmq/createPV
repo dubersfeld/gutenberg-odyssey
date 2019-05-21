@@ -1,0 +1,9 @@
+#!/bin/bash
+
+kubectl delete pvc rabbitmq-pvc
+kubectl delete pv rabbitmq-pv
+
+kubectl create -f rabbitmq-pv-hostpath.yaml
+kubectl create -f rabbitmq-pvc.yaml
+
+

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-service
+spec:
+  selector:
+    matchLabels:
+      run: config-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: config-service
+    spec:
+      containers:
+      - name: config-service
+        image: dubersfeld/config-server
+        #readinessProbe:
+          #initialDelaySeconds: 5
+          #periodSeconds: 10
+          #periodSeconds: 1
+          #httpGet:
+          #  path: /user-service/dev
+          #  port: 8888
+        volumeMounts:
+        - name: config
+          mountPath: /tmp/config-repo
+          readOnly: true
+        ports:
+        - containerPort: 8888
+      volumes:
+      - name: config
+        configMap: 
+          name: gutenberg-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-service
+  labels:
+    run: config-service
+spec:
+  ports:
+  - port: 8888
+    protocol: TCP
+  selector:
+    run: config-service

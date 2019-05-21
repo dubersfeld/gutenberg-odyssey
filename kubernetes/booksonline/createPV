@@ -1,0 +1,9 @@
+#!/bin/bash
+
+kubectl delete pvc mongodb-pvc
+kubectl delete pv mongodb-pv
+
+kubectl create -f mongodb-pv-hostpath.yaml
+kubectl create -f mongodb-pvc.yaml
+
+
