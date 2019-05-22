@@ -17,10 +17,10 @@ Here is the list of all 12 services:
 
 Server            | Image                      | Port         | Function             | Database connection
 ---------------   | -------------------------- | ------------ | -------------------- | -------------------
-rabbitmq-service  | rabbitmq:3-management      | 15672, 5672  | Messaging broker     | 
+rabbitmq-service  | rabbitmq:3-management      | 5672, 15672  | Messaging broker     | 
 config-service    | dubersfeld/config-server   | 8888         | Configuration server | None
 eureka-service    | dubersfeld/eureka-server   | 8761         | Discovery server     | None
-books-mongodb     | mongo                      | 27017        | Schemaless database  |
+books-mongodb     | dubersfeld/books-mongodb   | 27017        | Schemaless database  |
 book-service      | dubersfeld/book-server     | 8081         | Book requests        | booksonline
 review-service    | dubersfeld/review-server   | 8082         | Review requests      | booksonline
 order-service     | dubersfeld/order-server    | 8083         | Order requests       | booksonline
@@ -130,15 +130,15 @@ kubectl create -f run-config-service.yaml
 kubectl create -f run-eureka-service.yaml
 kubectl create -f run-zuul-service.yaml
 
-kubectl create -f run-book-service-with-readinesscheck.yaml
-kubectl create -f run-review-service-with-readinesscheck.yaml
-kubectl create -f run-order-service-with-readinesscheck.yaml
-kubectl create -f run-user-service-with-readinesscheck.yaml
+kubectl create -f run-book-service.yaml
+kubectl create -f run-review-service.yaml
+kubectl create -f run-order-service.yaml
+kubectl create -f run-user-service.yaml
 
 kubectl create -f run-redis-service.yaml
-kubectl create -f run-frontend-service-with-readinesscheck.yaml
+kubectl create -f run-frontend-service.yaml
 ```
-
+If needed replace dubersfeld by your own Doicker username in all YAML manifests.
 This starts all service. Wait for the readiness of all services. The display should look like this:
 
 ```
