@@ -16,7 +16,7 @@ spec:
       containers:
       - image: rabbitmq:3-management
         name: rabbitmq
-        livenessProbe:
+        readinessProbe:
           periodSeconds: 5
           initialDelaySeconds: 20
           tcpSocket:

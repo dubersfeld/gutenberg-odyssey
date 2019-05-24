@@ -14,10 +14,11 @@ spec:
     spec:
       containers:
       - image: dubersfeld/books-mongodb
+        imagePullPolicy: IfNotPresent
         name: mongo
-        livenessProbe:
-          periodSeconds: 5
-          initialDelaySeconds: 20
+        readinessProbe:
+          periodSeconds: 30
+          #initialDelaySeconds: 20
           tcpSocket:
             port: 27017
         volumeMounts:

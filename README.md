@@ -9,7 +9,6 @@ A recent Apache Maven version installed (I used 3.3.9)
 A Docker MongoDB image.
 A Docker Redis image.
 A Docker RabbitMQ image with management UI.
-A Docker Hub account.
 
 In addition I used Spring Tool Suite for developing this demo but it is not required for running the application.
 
@@ -58,6 +57,8 @@ The response should look like this:
 
 # 1. Creation Spring Boot images
 
+# 1.1 Using a Docker Hub account
+
 In each of the 9 project subdirectories:
 
 config-server
@@ -77,6 +78,18 @@ This will create the 9 Spring images.
 In subdirectory kubernetes/booksonline run the script booksBuild.sh.
 
 Retag all created images by replacing dubersfeld by your own Docker username and push them all.
+
+# 1.2 Without a Docker Hub account
+
+Open a terminal and run this command:
+```
+$ eval $(minikube docker-env)
+```
+Now any Docker command will access Minikube Docker daemon itself. Run all Docker build commands as before. This way all images are created inside Minikube so no push/pull sequence is needed. Note that this requires a change in image pull policy:
+```
+imagePullPolicy: IfNotPresent
+```
+
 
 
 # 2. Volumes creation

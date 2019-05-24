@@ -15,6 +15,7 @@ spec:
       containers:
       - name: admin-service
         image: dubersfeld/admin-server
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           periodSeconds: 30
           tcpSocket:

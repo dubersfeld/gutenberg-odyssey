@@ -15,6 +15,7 @@ spec:
       containers:
       - name: book-service
         image: dubersfeld/book-server
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           periodSeconds: 30
           tcpSocket:

@@ -15,6 +15,7 @@ spec:
       containers:
       - name: zuul-service
         image: dubersfeld/zuul-server
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           periodSeconds: 30
           tcpSocket:

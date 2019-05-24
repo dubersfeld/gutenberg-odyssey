@@ -15,6 +15,7 @@ spec:
       containers:
       - name: order-service
         image: dubersfeld/order-server
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           periodSeconds: 30
           tcpSocket:

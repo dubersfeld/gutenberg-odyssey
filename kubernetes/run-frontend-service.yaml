@@ -15,6 +15,7 @@ spec:
       containers:
       - name: frontend-service
         image: dubersfeld/frontend-server
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           periodSeconds: 30
           tcpSocket:

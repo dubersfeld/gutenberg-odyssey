@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: eureka-service
-        image: dubersfeld/eureka-server 
+        image: dubersfeld/eureka-server
+        imagePullPolicy: IfNotPresent 
         ports:
         - containerPort: 8761
 ---

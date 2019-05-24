@@ -15,7 +15,7 @@ spec:
       containers:
       - image: redis
         name: redis
-        livenessProbe:
+        readinessProbe:
           periodSeconds: 5
           initialDelaySeconds: 20
           tcpSocket:

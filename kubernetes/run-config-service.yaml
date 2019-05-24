@@ -15,13 +15,11 @@ spec:
       containers:
       - name: config-service
         image: dubersfeld/config-server
-        #readinessProbe:
-          #initialDelaySeconds: 5
-          #periodSeconds: 10
-          #periodSeconds: 1
-          #httpGet:
-          #  path: /user-service/dev
-          #  port: 8888
+        imagePullPolicy: IfNotPresent
+        readinessProbe:
+          periodSeconds: 30
+          tcpSocket:
+            port: 8888
         volumeMounts:
         - name: config
           mountPath: /tmp/config-repo
